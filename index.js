@@ -1,5 +1,5 @@
 /* global AFRAME */
-
+console.log('Super-Hands');
 if (typeof AFRAME === 'undefined') {
   throw new Error('Component attempted to register before AFRAME was available.')
 }
@@ -167,7 +167,7 @@ AFRAME.registerComponent('super-hands', {
   })(),
   onGrabStartButton: function (evt) {
     let carried = this.state.get(this.GRAB_EVENT)
-    this.dispatchMouseEventAll('mousedown', this.el)
+    // this.dispatchMouseEventAll('mousedown', this.el)
     this.gehClicking = new Set(this.hoverEls)
     if (!carried) {
       carried = this.findTarget(this.GRAB_EVENT, {
@@ -312,6 +312,7 @@ AFRAME.registerComponent('super-hands', {
   },
   onHit: function (evt) {
     const hitEl = evt.detail[this.data.colliderEventProperty]
+    console.log('onHit', hitEl);
     let hoverNeedsUpdate = 0
     if (!hitEl) { return }
     if (Array.isArray(hitEl)) {
@@ -327,6 +328,7 @@ AFRAME.registerComponent('super-hands', {
   /* search collided entities for target to hover/dragover */
   hover: function () {
     var hvrevt, hoverEl
+    console.log('hover');
     // end previous hover
     if (this.state.has(this.HOVER_EVENT)) {
       this._unHover(this.state.get(this.HOVER_EVENT), true)
